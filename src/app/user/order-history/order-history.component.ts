@@ -41,7 +41,7 @@ export class OrderHistoryComponent implements OnInit {
   }
 
   deleteOrder(orderId: string): void {
-    this.http.delete(`http://localhost:3000/orders/${orderId}`).subscribe({
+    this.http.delete(`${environment.baseUrl}/orders/${orderId}`).subscribe({
       next: () => {
         // Remove from UI
         this.orders = this.orders.filter((o) => o.id !== orderId);

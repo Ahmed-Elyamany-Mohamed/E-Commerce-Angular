@@ -3,6 +3,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AddProductService } from '../../services/add-product.service';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../services/cart-service.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-product-details',
@@ -14,12 +15,15 @@ export class ProductDetailsComponent {
   product: any;
   quantity: number = 1;
   removeItemCart = true;
+  isUserLoggedIn = false;
 
   constructor(
     private route: ActivatedRoute,
     private productService: AddProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private userService: UserService
   ) {}
+
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -29,6 +33,7 @@ export class ProductDetailsComponent {
         this.checkIfInCart();
       });
     }
+    this.isUserLoggedIn = !!localStorage.getItem('user');
   }
 
   increaseQty() {
@@ -57,5 +62,9 @@ export class ProductDetailsComponent {
   removeFromCart(_id: any) {
     this.cartService.removeFromCart(this.product.id);
     this.removeItemCart = true;
+  }
+
+  proceedToCheckout() {
+    this.userService.proceedToCheckout();
   }
 }

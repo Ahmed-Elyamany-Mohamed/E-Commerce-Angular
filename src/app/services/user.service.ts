@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { LogIn, SignUp } from '../../sign-up.model';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -10,6 +10,9 @@ import { environment } from '../../environments/environment';
 })
 export class UserService {
   constructor(private http: HttpClient, private router: Router) {}
+
+  isUserLoggedIn = false;
+
   isLoading = false;
   showToast = false;
 
@@ -18,6 +21,17 @@ export class UserService {
   //     `http://localhost:3000/users?email=${data.email}&password=${data.password}`
   //   );
   // }
+
+  proceedToCheckout() {
+    if (!this.isUserLoggedIn) {
+      alert('Please log in to checkout.');
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    // navigate to checkout
+    this.router.navigate(['/checkout']);
+  }
 
   async logIn(data: LogIn): Promise<LogIn[] | []> {
     try {

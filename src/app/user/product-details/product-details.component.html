@@ -38,9 +38,15 @@
       <button
         class="btn btn-outline-success btn-lg mx-2"
         routerLink="/checkout"
+        [disabled]="!isUserLoggedIn"
+        (click)="proceedToCheckout()"
       >
         CheckOut
       </button>
+      <ng-container>
+        *ngIf="!isUserLoggedIn" class="text-danger mt-2"> 🔒 You must log in to
+        proceed with checkout.
+      </ng-container>
     </div>
   </div>
 </div>
