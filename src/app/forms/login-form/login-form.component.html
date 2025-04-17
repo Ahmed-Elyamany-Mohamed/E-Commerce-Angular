@@ -1,0 +1,103 @@
+<section class="contact" data-aos="fade-up" id="contact">
+  <!-- form -->
+  <div class="container my-5 d-flex justify-content-center">
+    <div
+      class="card p-4 shadow-lg rounded-3"
+      style="max-width: 600px; width: 100%"
+    >
+      <h3 class="text-center mb-4 fw-bold fs-4">Login</h3>
+      <form class="fs-5 p-2" [formGroup]="myForm">
+        <div class="mb-3">
+          <label for="email" class="form-label fw-semibold">Your Email *</label>
+          <input
+            type="email"
+            class="form-control form-control-lg"
+            id="email"
+            placeholder="you@example.com"
+            required
+            formControlName="email"
+          />
+        </div>
+        <ng-container *ngIf="myForm.get('email')?.hasError('emailTaken')">
+          <div class="alert alert-danger" role="alert">
+            This email is already taken.
+          </div>
+        </ng-container>
+        <ng-container
+          *ngIf="myForm.get('email')?.touched && myForm.get('email')?.invalid"
+        >
+          <div class="alert alert-danger" role="alert">
+            This Field is Required.
+          </div>
+        </ng-container>
+        <div class="mb-3">
+          <label for="password" class="form-label fw-semibold"
+            >Password *</label
+          >
+          <input
+            type="password"
+            class="form-control form-control-lg"
+            id="password"
+            placeholder="Please Enter Your Password"
+            required
+            formControlName="password"
+          />
+        </div>
+        <ng-container
+          *ngIf="
+            myForm.get('password')?.invalid && myForm.get('password')?.touched
+          "
+        >
+          <div class="alert alert-danger" role="alert">
+            This Field is Required.
+          </div>
+        </ng-container>
+
+        <div class="d-grid">
+          <button
+            type="submit"
+            class="btn btn-primary btn-lg fw-semibold"
+            (click)="onSubmit()"
+            [disabled]="myForm.invalid || myForm.pending"
+          >
+            Send
+          </button>
+          <a class="to-signup" routerLink="/signup-auth"
+            >Already Have Account</a
+          >
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Spinner -->
+  <div class="text-center my-3" *ngIf="isLoading">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Sending...</span>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div
+    class="toast-container position-fixed bottom-0 center-0 p-3"
+    style="z-index: 9999"
+  >
+    <div
+      class="toast align-items-center text-white bg-danger border-0 fs-3"
+      role="alert"
+      [class.show]="showToast"
+      [class.hide]="!showToast"
+    >
+      <div class="d-flex">
+        <div class="toast-body">
+          {{ toastMessage }}
+        </div>
+        <button
+          type="button"
+          class="btn-close btn-close-white me-2 m-auto"
+          (click)="hideToast()"
+        ></button>
+      </div>
+    </div>
+  </div>
+</section>

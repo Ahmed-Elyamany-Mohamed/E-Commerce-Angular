@@ -1,0 +1,36 @@
+<div class="container my-5">
+  <h2 class="mb-4">Checkout</h2>
+
+  <form [formGroup]="checkoutForm" (ngSubmit)="onCheckout()">
+    <div class="mb-3">
+      <label>Name</label>
+      <input formControlName="name" class="form-control" required />
+    </div>
+    <div class="mb-3">
+      <label>Address</label>
+      <input formControlName="address" class="form-control" required />
+    </div>
+    <div class="mb-3">
+      <label>Phone</label>
+      <input formControlName="phone" class="form-control" required />
+    </div>
+
+    <h4 class="mt-4">Your Cart</h4>
+    <div *ngFor="let item of cart">
+      <p>
+        {{ item.productName }} ({{ item.quantity }}) -
+        {{ item.productPrice }} EGP
+      </p>
+    </div>
+
+    <p class="fw-bold">Total: {{ total }} EGP</p>
+
+    <button
+      type="submit"
+      class="btn btn-success"
+      [disabled]="checkoutForm.invalid"
+    >
+      Place Order
+    </button>
+  </form>
+</div>

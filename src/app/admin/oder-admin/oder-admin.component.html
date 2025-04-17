@@ -1,0 +1,27 @@
+<div class="container mt-4">
+  <h2>📦 All Orders</h2>
+  <div *ngFor="let order of orders" class="card p-3 my-3 shadow-sm">
+    <h5>Order #{{ order.id }}</h5>
+    <p><strong>Customer:</strong> {{ order.name }}</p>
+    <p><strong>Total:</strong> {{ order.total }} EGP</p>
+    <p><strong>Status:</strong> {{ order.status }}</p>
+
+    <select
+      class="form-select w-50"
+      (change)="updateStatus(order.id, $any($event.target).value)"
+    >
+      <option [value]="'pending'" [selected]="order.status === 'pending'">
+        Pending
+      </option>
+      <option [value]="'shipped'" [selected]="order.status === 'shipped'">
+        Shipped
+      </option>
+      <option [value]="'delivered'" [selected]="order.status === 'delivered'">
+        Delivered
+      </option>
+      <option [value]="'cancelled'" [selected]="order.status === 'cancelled'">
+        Cancelled
+      </option>
+    </select>
+  </div>
+</div>

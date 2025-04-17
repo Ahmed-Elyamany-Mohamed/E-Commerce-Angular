@@ -1,0 +1,36 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Your Products</h2>
+  <div *ngIf="products.length === 0" class="alert alert-warning text-center">
+    {{ notFound }}
+  </div>
+  <p class="text-danger">{{ isDeleted }}</p>
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let product of products">
+      <div class="card h-100">
+        <img
+          [src]="product.img"
+          class="card-img-top"
+          alt="{{ product.productName }}"
+          style="height: 200px; object-fit: cover"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ product.productName }}</h5>
+          <p class="card-text">{{ product.description }}</p>
+          <p class="card-text fw-bold">Price: {{ product.productPrice }} EGP</p>
+          <button
+            class="btn btn-outline-danger"
+            (click)="deleteProduct(product.id)"
+          >
+            Delete
+          </button>
+          <button
+            class="btn btn-outline-primary mx-2"
+            (click)="onEdit(product.id)"
+          >
+            Edit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,166 @@
+<section class="contact" data-aos="fade-up" id="contact">
+  <!-- form -->
+  <div class="container my-5 d-flex justify-content-center">
+    <div
+      class="card p-4 shadow-lg rounded-3"
+      style="max-width: 600px; width: 100%"
+    >
+      <p>{{ productMsg }}</p>
+      <h3 class="text-center mb-4 fw-bold fs-4">Add Product</h3>
+      <form class="fs-5 p-2" [formGroup]="myForm">
+        <div class="mb-3">
+          <label for="name" class="form-label fw-semibold"
+            >Product Name *</label
+          >
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            placeholder="please Enter The Product Name"
+            required
+            formControlName="productName"
+          />
+        </div>
+        <ng-container
+          *ngIf="
+            myForm.get('productName')?.invalid &&
+            myForm.get('productName')?.touched
+          "
+        >
+          <div class="alert alert-danger" role="alert">
+            This Field is Required.
+          </div>
+        </ng-container>
+        <div class="mb-3">
+          <label for="email" class="form-label fw-semibold"
+            >Product Price *</label
+          >
+          <input
+            type="number"
+            class="form-control form-control-lg"
+            placeholder="please Enter The Product Price"
+            required
+            formControlName="productPrice"
+          />
+        </div>
+        <ng-container
+          *ngIf="
+            myForm.get('productPrice')?.invalid &&
+            myForm.get('productPrice')?.touched
+          "
+        >
+          <div class="alert alert-danger" role="alert">
+            This Field is Required.
+          </div>
+        </ng-container>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Category *</label>
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            placeholder="Please Enter Your Password"
+            required
+            formControlName="category"
+          />
+        </div>
+        <ng-container
+          *ngIf="
+            myForm.get('category')?.invalid && myForm.get('category')?.touched
+          "
+        >
+          <div class="alert alert-danger" role="alert">
+            This Field is Required.
+          </div>
+        </ng-container>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Description *</label>
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            placeholder="Please Enter Your Password"
+            required
+            formControlName="description"
+          />
+        </div>
+        <ng-container
+          *ngIf="
+            myForm.get('description')?.invalid &&
+            myForm.get('description')?.touched
+          "
+        >
+          <div class="alert alert-danger" role="alert">
+            This Field is Required.
+          </div>
+        </ng-container>
+        <!-- Image Upload -->
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Upload Image *</label>
+          <input
+            type="file"
+            class="form-control"
+            (change)="onImageUpload($event)"
+          />
+        </div>
+
+        <!-- Image Preview -->
+        <img
+          *ngIf="previewImage"
+          [src]="previewImage"
+          style="max-width: 200px; margin-bottom: 10px"
+        />
+
+        <!-- Hidden field to store base64 image -->
+        <input type="hidden" formControlName="img" />
+
+        <ng-container
+          *ngIf="myForm.get('img')?.invalid && myForm.get('img')?.touched"
+        >
+          <div class="alert alert-danger" role="alert">
+            This Field is Required.
+          </div>
+        </ng-container>
+
+        <div class="d-grid">
+          <button
+            type="submit"
+            class="btn btn-primary btn-lg fw-semibold"
+            (click)="onSubmit()"
+            [disabled]="myForm.invalid || myForm.pending"
+          >
+            Add
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Spinner -->
+  <div class="text-center my-3" *ngIf="isLoading">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Sending...</span>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div
+    class="toast-container position-fixed bottom-0 center-0 p-3"
+    style="z-index: 9999"
+  >
+    <div
+      class="toast align-items-center text-white bg-danger border-0 fs-3"
+      role="alert"
+      [class.show]="showToast"
+      [class.hide]="!showToast"
+    >
+      <div class="d-flex">
+        <div class="toast-body">
+          {{ toastMessage }}
+        </div>
+        <button
+          type="button"
+          class="btn-close btn-close-white me-2 m-auto"
+          (click)="hideToast()"
+        ></button>
+      </div>
+    </div>
+  </div>
+</section>

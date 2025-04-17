@@ -1,0 +1,129 @@
+<!-- <nav class="nav">
+  <h1>E-Commerce</h1>
+  <div class="nav-search">
+    <input type="text" placeholder="Search for a product" />
+    <button>Search</button>
+    <ul>
+      <li><a routerLink="/seller-auth">Seller</a></li>
+      <li><a routerLink="">Home</a></li>
+      <li><a routerLink="">Login</a></li>
+      <li><a routerLink="">Cart(0 )</a></li>
+    </ul>
+  </div>
+</nav> -->
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">E-Commerce</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      [ngSwitch]="menuType"
+      class="collapse navbar-collapse"
+      id="navbarSupportedContent"
+    >
+      <!-- * if default -->
+      <ul *ngSwitchCase="'default'" class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home">Home</a>
+        </li>
+        <!-- !! add here a welcome page to default can see to signup or login -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/signup-auth">Sign-Up</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login">Log In</a>
+        </li>
+        <div class="dropdown">
+          <button
+            class="btn btn-outline-dark dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+          >
+            Cart ({{ cartCount }})
+          </button>
+          <ul class="dropdown-menu">
+            <li *ngFor="let item of cart">
+              {{ item.productName }} x{{ item.quantity }}
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/cart">View Cart</a>
+            </li>
+          </ul>
+        </div>
+      </ul>
+      <!-- * if admin -->
+      <ul *ngSwitchCase="'admin'" class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="admin/add-product">Add Product</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="admin/orders">Orders</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="cursor: pointer" (click)="logOut()"
+            >Log Out</a
+          >
+        </li>
+      </ul>
+      <!-- * if user -->
+      <ul *ngSwitchCase="'user'" class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/order">Orders</a>
+        </li>
+        <div class="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+          >
+            Cart ({{ cartCount }})
+          </button>
+          <ul class="dropdown-menu">
+            <li *ngFor="let item of cart">
+              {{ item.productName }} x{{ item.quantity }}
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/cart">View Cart</a>
+            </li>
+          </ul>
+        </div>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink=""
+            style="cursor: pointer"
+            (click)="logOut()"
+            >Log Out</a
+          >
+        </li>
+      </ul>
+
+      <form class="d-flex" role="search">
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+          (keyup)="searchProduct($event)"
+        />
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>

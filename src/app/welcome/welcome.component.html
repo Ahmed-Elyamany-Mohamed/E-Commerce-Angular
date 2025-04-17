@@ -1,0 +1,10 @@
+<div class="welcome-container">
+  <h1>👋 Welcome, {{ userName }}!</h1>
+  <p class="subtitle">We're so glad you're here.</p>
+  <ng-container *ngIf="!isAdmin">
+    <button class="shop-btn" (click)="goToShop()">Start Shopping 🛍️</button>
+  </ng-container>
+
+  <div class="bg-circle circle1"></div>
+  <div class="bg-circle circle2"></div>
+</div>

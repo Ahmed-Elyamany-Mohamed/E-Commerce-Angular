@@ -1,1 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+/* html {
+  font-size: 10px;
+} */
+body {
+  font-family: sans-serif;
+}
+html {
+  /* font-size: 10px; */
+}
+
+.container {
+  width: 100%;
+  margin: 1rem auto;
+}
+
+.alert-warning {
+  font-size: 1.2rem;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.err-msg {
+  color: red;
+  font-weight: bold;
+}
+
+.to-signup,
+.to-login {
+  text-decoration: none;
+  color: blue;
+  cursor: pointer;
+}
+.to-login {
+  text-decoration: none;
+  color: blue;
+  cursor: pointer;
+}
+.to-login:hover,
+.to-signup:hover {
+  color: rgb(3, 3, 68);
+}
