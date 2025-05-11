@@ -1,40 +1,49 @@
 <div class="container my-5">
-    <h2>Your Cart 🛒</h2>
-    <div *ngIf="cart.length > 0; else emptyCart">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>Qty</th>
-            <th>Price</th>
-            <th>Total</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of cart">
-            <td>{{ item.productName }}</td>
-            <td>
-              <button (click)="decreaseQty(item)">−</button>
-              {{ item.quantity }}
-              <button (click)="increaseQty(item)">+</button>
-            </td>
-            <td>{{ item.productPrice }} EGP</td>
-            <td>{{ item.productPrice * item.quantity }} EGP</td>
-            <td>
-              <button class="btn btn-sm btn-danger" (click)="removeItem(item.id)">
-                🗑
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <h4>Total: {{ total }} EGP</h4>
-      <button routerLink="/checkout" class="btn btn-outline-success">Proceed to Checkout</button>
-    </div>
-  
-    <ng-template #emptyCart>
-      <p>Your cart is empty 💤</p>
-    </ng-template>
+  <h2>Your Cart 🛒</h2>
+  <div *ngIf="cart.length > 0; else emptyCart">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Qty</th>
+          <th>Price</th>
+          <th>Total</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cart">
+          <td>{{ item.productName }}</td>
+          <td>
+            <button (click)="decreaseQty(item)">−</button>
+            {{ item.quantity }}
+            <button (click)="increaseQty(item)">+</button>
+          </td>
+          <td>{{ item.productPrice }} EGP</td>
+          <td>{{ item.productPrice * item.quantity }} EGP</td>
+          <td>
+            <button class="btn btn-sm btn-danger" (click)="removeItem(item.id)">
+              🗑
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <h4>Total: {{ total }} EGP</h4>
+    <button
+      routerLink="/checkout"
+      class="btn btn-outline-success"
+      [disabled]="!isUserLoggedIn"
+      (click)="proceedToCheckout()"
+    >
+      Proceed to Checkout
+    </button>
+    <ng-container *ngIf="!isUserLoggedIn" class="text-danger mt-2">
+      🔒 You must log in to proceed with checkout.
+    </ng-container>
   </div>
-  
+
+  <ng-template #emptyCart>
+    <p>Your cart is empty 💤</p>
+  </ng-template>
+</div>

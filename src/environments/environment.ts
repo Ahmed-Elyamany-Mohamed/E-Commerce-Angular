@@ -1,5 +1,5 @@
 export const environment = {
-    production: false,
-    baseUrl: 'https://2d28c913-2da4-4b23-bfde-e79eba4852a1-00-2coqckf5vklw1.kirk.replit.dev',
-  };
-  
+  production: false,
+  baseUrl:
+    'https://bea83e01-a027-4116-9b9c-a7a518c38ba2-00-2hxb2q9lpkh8u.picard.replit.dev',
+};

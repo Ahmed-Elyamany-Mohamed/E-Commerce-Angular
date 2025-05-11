@@ -43,9 +43,8 @@
       >
         CheckOut
       </button>
-      <ng-container>
-        *ngIf="!isUserLoggedIn" class="text-danger mt-2"> 🔒 You must log in to
-        proceed with checkout.
+      <ng-container *ngIf="!isUserLoggedIn" class="text-danger mt-2">
+        🔒 You must log in to proceed with checkout.
       </ng-container>
     </div>
   </div>

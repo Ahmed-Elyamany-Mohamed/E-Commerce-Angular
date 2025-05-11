@@ -47,31 +47,6 @@ export class UserService {
     }
   }
 
-  // signUp(data: SignUp) {
-  //   return this.http.post('http://localhost:3000/users', data).subscribe({
-  //     next: () => {
-  //       alert('✅ Account created successfully!');
-  //       this.router.navigate(['/login']); // ✅ redirect to login page
-  //     },
-  //     error: () => {
-  //       alert('❌ Signup failed. Try again later.');
-  //     },
-  //   });
-  // }
-
-  // signUp(data: SignUp) {
-  //   return this.http.post('http://localhost:3000/users', data).subscribe({
-  //     next: (res: any) => {
-  //       localStorage.setItem('user', JSON.stringify(res)); // ✅ Save to localStorage
-  //       alert('✅ Account created successfully!');
-  //       this.router.navigate(['/login']); // ✅ Redirect to login page
-  //     },
-  //     error: () => {
-  //       alert('❌ Signup failed. Try again later.');
-  //     },
-  //   });
-  // }
-
   signUp(data: SignUp, showToast: (msg: string) => void) {
     this.http.post(`${environment.baseUrl}/users`, data).subscribe({
       next: (res) => {

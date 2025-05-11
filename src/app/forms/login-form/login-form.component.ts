@@ -62,105 +62,6 @@ export class LoginFormComponent implements OnInit {
     this.sellerService.reLoadSeller();
   }
 
-  // onSubmit() {
-  //   if (this.myForm.valid) {
-  //     const { email, password } = this.myForm.value;
-
-  //     const admin$ = this.sellerService.logIn({ email, password });
-  //     const user$ = this.userService.logIn({ email, password });
-
-  //     forkJoin([admin$, user$]).subscribe(([adminRes, userRes]) => {
-  //       if (adminRes.length === 1 && userRes.length === 0) {
-  //         // ✅ Admin only
-  //         localStorage.setItem('admin', JSON.stringify(adminRes[0]));
-  //         this.router.navigate(['/admin/dashboard']);
-  //       } else if (userRes.length === 1) {
-  //         // ✅ User only (or both but prefer user role)
-  //         localStorage.setItem('user', JSON.stringify(userRes[0]));
-  //         this.router.navigate(['/home']);
-  //       } else {
-  //         alert('❌ Invalid email or password');
-  //       }
-  //     });
-  //   }
-  // }
-
-  // !!----
-  // async onSubmit() {
-  //   if (this.myForm.valid) {
-  //     const { email, password } = this.myForm.value;
-
-  //     // 🔁 Try admin login
-  //     const adminRes = await this.sellerService.logIn({ email, password });
-  //     if (adminRes.length === 1) {
-  //       localStorage.setItem('admin', JSON.stringify(adminRes[0]));
-  //       this.router.navigate(['/admin/dashboard']);
-  //       return;
-  //     }
-
-  //     // 🔁 Try user login
-  //     const userRes = await this.userService.logIn({ email, password });
-  //     if (userRes.length === 1) {
-  //       localStorage.setItem('user', JSON.stringify(userRes[0]));
-  //       this.router.navigate(['/home']);
-  //       return;
-  //     }
-
-  //     // ❌ Invalid credentials
-  //     this.showToastMessage('❌ Invalid email or password');
-  //   }
-  // }
-
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  // async onSubmit() {
-  //   if (this.myForm.valid) {
-  //     const { email, password } = this.myForm.value;
-
-  //     // 1️⃣ Try admin login
-  //     const adminRes = await this.sellerService.logIn({ email, password });
-  //     if (adminRes.length === 1) {
-  //       localStorage.setItem('admin', JSON.stringify(adminRes[0]));
-  //       this.router.navigate(['/admin/dashboard']);
-  //       return;
-  //     }
-
-  //     // 2️⃣ Try user login
-  //     const userRes = await this.userService.logIn({ email, password });
-  //     if (userRes.length === 1) {
-  //       const user = userRes[0] as LogIn & { id: string };
-  //       localStorage.setItem('user', JSON.stringify(user));
-
-  //       // ✅ 3️⃣ ⬇️ Add cart merge logic here
-  //       const guestCart = localStorage.getItem('cart_guest');
-  //       if (guestCart) {
-  //         const parsed = JSON.parse(guestCart);
-  //         const userCartKey = `cart_${user.id}`;
-  //         const userCart = JSON.parse(
-  //           localStorage.getItem(userCartKey) || '[]'
-  //         );
-
-  //         parsed.forEach((item: any) => {
-  //           const existing = userCart.find((p: any) => p.id === item.id);
-  //           if (existing) {
-  //             existing.quantity += item.quantity;
-  //           } else {
-  //             userCart.push(item);
-  //           }
-  //         });
-
-  //         localStorage.setItem(userCartKey, JSON.stringify(userCart));
-  //         localStorage.removeItem('cart_guest');
-  //       }
-
-  //       this.router.navigate(['/home']);
-  //       return;
-  //     }
-
-  //     // 4️⃣ Show error
-  //     this.showToastMessage('❌ Invalid email or password');
-  //   }
-  // }
-
   async onSubmit() {
     if (this.myForm.valid) {
       const { email, password } = this.myForm.value;
@@ -245,5 +146,14 @@ export class LoginFormComponent implements OnInit {
 
   hideToast() {
     this.showToast = false;
+  }
+
+  get formError() {
+    return (
+      (this.myForm.get('email')?.touched &&
+        this.myForm.get('email')?.invalid) ||
+      (this.myForm.get('password')?.touched &&
+        this.myForm.get('password')?.invalid)
+    );
   }
 }

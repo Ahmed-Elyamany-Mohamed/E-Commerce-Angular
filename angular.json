@@ -20,6 +20,23 @@
             "tsConfig": "tsconfig.app.json",
             "baseHref": "/E-Commerce-Angular/",
             "assets": [
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "src/assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/favicon.ico"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/manifest.webmanifest"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/robots.txt"
+              },
               {
                 "glob": "**/*",
                 "input": "public"

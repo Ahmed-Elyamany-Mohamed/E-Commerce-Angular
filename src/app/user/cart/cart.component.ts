@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../services/cart-service.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-cart',
@@ -11,12 +12,17 @@ import { RouterLink } from '@angular/router';
 })
 export class CartComponent implements OnInit {
   cart: any[] = [];
+  isUserLoggedIn = false;
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.loadCart();
     this.cartService.cartChanged.subscribe(() => this.loadCart()); // live update
+    this.isUserLoggedIn = !!localStorage.getItem('user');
   }
 
   loadCart() {
@@ -40,5 +46,9 @@ export class CartComponent implements OnInit {
       (acc, item) => acc + item.productPrice * item.quantity,
       0
     );
+  }
+
+  proceedToCheckout() {
+    this.userService.proceedToCheckout();
   }
 }

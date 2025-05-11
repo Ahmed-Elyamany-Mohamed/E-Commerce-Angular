@@ -18,13 +18,7 @@
             formControlName="name"
           />
         </div>
-        <ng-container
-          *ngIf="myForm.get('name')?.invalid && myForm.get('name')?.touched"
-        >
-          <div class="alert alert-danger" role="alert">
-            This Field is Required.
-          </div>
-        </ng-container>
+
         <div class="mb-3">
           <label for="email" class="form-label fw-semibold">Your Email *</label>
           <input
@@ -41,13 +35,7 @@
             This email is already taken.
           </div>
         </ng-container>
-        <ng-container
-          *ngIf="myForm.get('email')?.touched && myForm.get('email')?.invalid"
-        >
-          <div class="alert alert-danger" role="alert">
-            This Field is Required.
-          </div>
-        </ng-container>
+
         <div class="mb-3">
           <label for="password" class="form-label fw-semibold"
             >Password *</label
@@ -61,17 +49,14 @@
             formControlName="password"
           />
         </div>
-        <ng-container
-          *ngIf="
-            myForm.get('password')?.invalid && myForm.get('password')?.touched
-          "
-        >
-          <div class="alert alert-danger" role="alert">
-            This Field is Required.
-          </div>
-        </ng-container>
 
         <div class="d-grid">
+          @if (formError) {
+          <div class="alert alert-danger" role="alert">
+            Check Your Inputs All Field is Required
+          </div>
+          }
+
           <button
             type="submit"
             class="btn btn-primary btn-lg fw-semibold"

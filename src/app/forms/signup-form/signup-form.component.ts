@@ -67,21 +67,6 @@ export class SignupFormComponent implements OnInit {
   ngOnInit(): void {
     this.sellerService.reLoadSeller();
   }
-  // onSubmit() {
-  //   this.submitted = true;
-  //   console.log(this.myForm.value);
-
-  //   if (this.myForm.valid) {
-  //     console.log(this.myForm.value);
-  //     this.sellerService.signUp(this.myForm.value);
-  //   }
-
-  //   if (this.myForm.invalid) {
-  //     this.showToastMessage('Please fill all required fields.');
-  //     return;
-  //   }
-  //   this.isLoading = true;
-  // }
 
   onSubmit() {
     if (this.myForm.valid) {
@@ -105,5 +90,16 @@ export class SignupFormComponent implements OnInit {
 
   hideToast() {
     this.showToast = false;
+  }
+
+  get formError() {
+    return (
+      (this.myForm.get('password')?.hasError('required') &&
+        this.myForm.get('password')?.touched) ||
+      (this.myForm.get('password')?.hasError('minlength') &&
+        this.myForm.get('password')?.touched) ||
+      (this.myForm.get('name')?.hasError('required') &&
+        this.myForm.get('name')?.touched)
+    );
   }
 }
